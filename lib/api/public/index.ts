@@ -9,3 +9,6 @@ export type {
   OrderBookOptions,
   OrderBookResponse
 } from '@/api/public/order_book'
+
+export { fetchTrades } from '@/api/public/trades'
+export type { TradesOptions, TradesResponse } from '@/api/public/trades'

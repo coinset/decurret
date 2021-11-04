@@ -1,6 +1,6 @@
 import { fetchSymbol } from '@/api/public/symbol'
 
-describe('fetchCurrencyPairs', () => {
+describe('fetchSymbol', () => {
   it('should return right field data types', async () => {
     const result = await fetchSymbol()
 

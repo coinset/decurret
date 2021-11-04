@@ -1,6 +1,6 @@
 import { fetchTicker } from '@/api/public/ticker'
 
-describe('fetchCurrencyPairs', () => {
+describe('fetchTicker', () => {
   it('should return right field data types', async () => {
     const result = await fetchTicker({ pair: 'BTC_JPY' })
 
