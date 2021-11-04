@@ -12,3 +12,9 @@ export type {
 
 export { fetchTrades } from '@/api/public/trades'
 export type { TradesOptions, TradesResponse } from '@/api/public/trades'
+
+export { fetchCandlestick } from '@/api/public/candlestick'
+export type {
+  CandlestickOptions,
+  CandlestickResponse
+} from '@/api/public/candlestick'
