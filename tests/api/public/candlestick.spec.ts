@@ -9,27 +9,21 @@ describe('fetchCandlestick', () => {
 
     const fields = ['symbolId', 'candlesticks', 'timestamp']
 
-    const keys = Object.keys(result)
-    fields.forEach((field) => {
-      expect(keys).toContain(field)
-    })
-
-    expect(keys).toHaveLength(fields.length)
+    expect(result).toContainAllKeys(fields)
 
     const { symbolId, candlesticks, timestamp } = result
 
-    expect(symbolId).toEqual(expect.any(Number))
-    expect(candlesticks).toEqual(expect.any(Array))
-    expect(candlesticks[0]).toEqual(expect.any(Object))
+    expect(symbolId).toBeNumber()
+    expect(candlesticks).toBeArray()
+    expect(timestamp).toBeAfter(new Date('2000/1/1'))
 
-    const { open, high, low, close, volume, time } = candlesticks[0]
-
-    expect(open).toEqual(expect.any(Number))
-    expect(high).toEqual(expect.any(Number))
-    expect(low).toEqual(expect.any(Number))
-    expect(close).toEqual(expect.any(Number))
-    expect(volume).toEqual(expect.any(Number))
-    expect(time).toEqual(expect.any(Date))
-    expect(timestamp).toEqual(expect.any(Date))
+    candlesticks.forEach(({ open, high, low, close, volume, time }) => {
+      expect(open).toBeNumber()
+      expect(high).toBeNumber()
+      expect(low).toBeNumber()
+      expect(close).toBeNumber()
+      expect(volume).toBeNumber()
+      expect(time).toBeAfter(new Date('2000/1/1'))
+    })
   })
 })

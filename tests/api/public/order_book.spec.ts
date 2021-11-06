@@ -15,10 +15,7 @@ describe('fetchOrderBook', () => {
       'timestamp'
     ]
 
-    const keys = Object.keys(result)
-    fields.forEach((field) => {
-      expect(keys).toContain(field)
-    })
+    expect(result).toContainAllKeys(fields)
 
     const {
       symbolId,
@@ -31,19 +28,22 @@ describe('fetchOrderBook', () => {
       timestamp
     } = result
 
-    expect(symbolId).toEqual(expect.any(Number))
-    expect(asks).toEqual(expect.any(Array))
-    expect(asks[0]).toEqual(expect.any(Object))
-    expect(asks[0].price).toEqual(expect.any(Number))
-    expect(asks[0].amount).toEqual(expect.any(Number))
-    expect(bids).toEqual(expect.any(Array))
-    expect(bids[0]).toEqual(expect.any(Object))
-    expect(bids[0].price).toEqual(expect.any(Number))
-    expect(bids[0].amount).toEqual(expect.any(Number))
-    expect(bestBid).toEqual(expect.any(Number))
-    expect(bestAsk).toEqual(expect.any(Number))
-    expect(midPrice).toEqual(expect.any(Number))
-    expect(spread).toEqual(expect.any(Number))
-    expect(timestamp).toEqual(expect.any(Date))
+    expect(symbolId).toBeNumber()
+
+    const forEachCase = (value: { price: number; amount: number }[]) => {
+      expect(value).toBeArray()
+      value.forEach(({ price, amount }) => {
+        expect(price).toBeNumber()
+        expect(amount).toBeNumber()
+      })
+    }
+
+    forEachCase(asks)
+    forEachCase(bids)
+    expect(bestBid).toBeNumber()
+    expect(bestAsk).toBeNumber()
+    expect(midPrice).toBeNumber()
+    expect(spread).toBeNumber()
+    expect(timestamp).toBeAfter(new Date('2000/1/1'))
   })
 })

@@ -1,1 +1,1 @@
-export type { DecurretPair } from '@/shared/types/currency'
+export type { DecurretPair, DeccretSymbol } from '@/shared/types/currency'
