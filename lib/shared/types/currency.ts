@@ -1,11 +1,9 @@
-import type { StrictExtract } from '@/utils/types'
-import type { All_Pairs } from 'cryptocurrency-types'
+import type { BTC, ETH, XRP, ONT, QTUM, Pair, JPY } from 'cryptocurrency-types'
 import type { Exclusive } from 'utilitypes'
 
-type DecurretPair = StrictExtract<
-  All_Pairs,
-  'BTC_JPY' | 'ETH_BTC' | 'ETH_JPY' | 'XRP_JPY' | 'ONT_JPY' | 'QTUM_JPY'
->
+type DeccretSymbol = BTC | ETH | XRP | ONT | QTUM
+
+type DecurretPair = Pair<DeccretSymbol, JPY> | Pair<ETH, BTC>
 
 type SymbolIdOrPair = Exclusive<
   {
@@ -15,4 +13,4 @@ type SymbolIdOrPair = Exclusive<
     pair: DecurretPair
   }
 >
-export type { DecurretPair, SymbolIdOrPair }
+export type { DecurretPair, SymbolIdOrPair, DeccretSymbol }

@@ -3,26 +3,18 @@ import { fetchTrades } from '@/api/public/trades'
 describe('fetchTrades', () => {
   it('should return right field data types', async () => {
     const result = await fetchTrades({ pair: 'BTC_JPY' })
-
-    const fields = ['symbolId', 'trades', 'timestamp']
-
-    const keys = Object.keys(result)
-    fields.forEach((field) => {
-      expect(keys).toContain(field)
-    })
-
-    expect(keys).toHaveLength(fields.length)
     const { symbolId, trades, timestamp } = result
 
-    expect(symbolId).toEqual(expect.any(Number))
-    expect(trades).toEqual(expect.any(Array))
-    expect(trades[0]).toEqual(expect.any(Object))
-    const { id, orderSide, price, amount, tradedAt } = trades[0]
-    expect(id).toEqual(expect.any(Number))
-    expect(orderSide).toMatch(/BUY|SELL/)
-    expect(price).toEqual(expect.any(Number))
-    expect(amount).toEqual(expect.any(Number))
-    expect(tradedAt).toEqual(expect.any(Date))
-    expect(timestamp).toEqual(expect.any(Date))
+    expect(symbolId).toBeNumber()
+    expect(trades).toBeArray()
+
+    trades.forEach(({ id, orderSide, price, amount, tradedAt }) => {
+      expect(id).toBeNumber()
+      expect(orderSide).toBeOneOf(['BUY', 'SELL'])
+      expect(price).toBeNumber()
+      expect(amount).toBeNumber()
+      expect(tradedAt).toBeAfter(new Date('2000/1/1'))
+      expect(timestamp).toBeAfter(new Date('2000/1/1'))
+    })
   })
 })
